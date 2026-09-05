@@ -8,4 +8,4 @@ __pycache__/
 *.json
 .coverage
 htmlcov/
-.coverage.gen_um_testgen_um_test
+.coverage.gen_um_test
