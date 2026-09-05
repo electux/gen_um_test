@@ -1,0 +1,11 @@
+#include <gtest/gtest.h>
+#include "${MOCK_HEADER}"
+
+${TEST_NAMESPACE_OPEN}
+class ${TEST_FIXTURE_CLASS} : public ::testing::Test {
+ protected:
+  ${MOCK_CLASS} mock;
+};
+
+${TEST_CASES}
+${TEST_NAMESPACE_CLOSE}

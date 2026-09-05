@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="./">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>gen_test.infrastructure.subprocessor module &#8212; gen_test https://github.com/vroncevic/gen_test/releases documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css?v=514cf933" />
+    
+    <script src="_static/documentation_options.js?v=2c49ac3c"></script>
+    <script src="_static/doctools.js?v=888ff710"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="gen_test.setup package" href="gen_test.setup.html" />
+    <link rel="prev" title="gen_test.infrastructure.parser.cpp_parser module" href="gen_test.infrastructure.parser.cpp_parser.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="gen_test.setup.html" title="gen_test.setup package"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="gen_test.infrastructure.parser.cpp_parser.html" title="gen_test.infrastructure.parser.cpp_parser module"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">gen_test https://github.com/vroncevic/gen_test/releases documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >gen_test</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="gen_test.html" >gen_test package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="gen_test.infrastructure.html" accesskey="U">gen_test.infrastructure package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">gen_test.infrastructure.subprocessor module</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <section id="module-gen_test.infrastructure.subprocessor">
+<span id="gen-test-infrastructure-subprocessor-module"></span><h1>gen_test.infrastructure.subprocessor module<a class="headerlink" href="#module-gen_test.infrastructure.subprocessor" title="Link to this heading">¶</a></h1>
+<dl class="simple">
+<dt>Module</dt><dd><p>subprocessor.py</p>
+</dd>
+<dt>Copyright</dt><dd><p>Copyright (C) 2026 Vladimir Roncevic &lt;<a class="reference external" href="mailto:elektron&#46;ronca&#37;&#52;&#48;gmail&#46;com">elektron<span>&#46;</span>ronca<span>&#64;</span>gmail<span>&#46;</span>com</a>&gt;
+gen_test is free software: you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by the
+Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+gen_test is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+See the GNU General Public License for more details.
+You should have received a copy of the GNU General Public License along
+with this program. If not, see &lt;<a class="reference external" href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>&gt;.</p>
+</dd>
+<dt>Info</dt><dd><p>Defines SubProcessor adapter implementing ISubProcessor protocol.</p>
+</dd>
+</dl>
+<dl class="py class">
+<dt class="sig sig-object py" id="gen_test.infrastructure.subprocessor.SubProcessor">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">gen_test.infrastructure.subprocessor.</span></span><span class="sig-name descname"><span class="pre">SubProcessor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parser</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="gen_test.core.service.icpp_parser.html#gen_test.core.service.icpp_parser.ICppParser" title="gen_test.core.service.icpp_parser.ICppParser"><span class="pre">ICppParser</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">mock_gen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="gen_test.core.service.imock_generator.html#gen_test.core.service.imock_generator.IMockGenerator" title="gen_test.core.service.imock_generator.IMockGenerator"><span class="pre">IMockGenerator</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">test_gen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="gen_test.core.service.itest_generator.html#gen_test.core.service.itest_generator.ITestGenerator" title="gen_test.core.service.itest_generator.ITestGenerator"><span class="pre">ITestGenerator</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">fake_gen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="gen_test.core.service.ifake_generator.html#gen_test.core.service.ifake_generator.IFakeGenerator" title="gen_test.core.service.ifake_generator.IFakeGenerator"><span class="pre">IFakeGenerator</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">cmake_gen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="gen_test.core.service.icmake_generator.html#gen_test.core.service.icmake_generator.ICMakeGenerator" title="gen_test.core.service.icmake_generator.ICMakeGenerator"><span class="pre">ICMakeGenerator</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">main_gen</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="gen_test.infrastructure.generator.main_generator.html#gen_test.infrastructure.generator.main_generator.MainGenerator" title="gen_test.infrastructure.generator.main_generator.MainGenerator"><span class="pre">MainGenerator</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">formatter</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="gen_test.infrastructure.generator.code_formatter.html#gen_test.infrastructure.generator.code_formatter.CodeFormatter" title="gen_test.infrastructure.generator.code_formatter.CodeFormatter"><span class="pre">CodeFormatter</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/gen_test/infrastructure/subprocessor.html#SubProcessor"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gen_test.infrastructure.subprocessor.SubProcessor" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>SubProcessor orchestrating C++ interface parsing and test suite code generation.</p>
+<p>It defines:</p>
+<blockquote>
+<div><dl class="field-list">
+<dt class="field-odd">methods<span class="colon">:</span></dt>
+<dd class="field-odd"><div class="line-block">
+<div class="line">__init__ - Initializes SubProcessor with parsers and generators.</div>
+<div class="line">run - Executes generation pipeline.</div>
+<div class="line">is_initialized - Checks if subprocessor is initialized.</div>
+<div class="line">__str__ - Returns string representation of SubProcessor.</div>
+</div>
+</dd>
+</dl>
+</div></blockquote>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gen_test.infrastructure.subprocessor.SubProcessor._cmake_gen">
+<span class="sig-name descname"><span class="pre">_cmake_gen</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="gen_test.core.service.icmake_generator.html#gen_test.core.service.icmake_generator.ICMakeGenerator" title="gen_test.core.service.icmake_generator.ICMakeGenerator"><span class="pre">ICMakeGenerator</span></a></em><a class="headerlink" href="#gen_test.infrastructure.subprocessor.SubProcessor._cmake_gen" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gen_test.infrastructure.subprocessor.SubProcessor._fake_gen">
+<span class="sig-name descname"><span class="pre">_fake_gen</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="gen_test.core.service.ifake_generator.html#gen_test.core.service.ifake_generator.IFakeGenerator" title="gen_test.core.service.ifake_generator.IFakeGenerator"><span class="pre">IFakeGenerator</span></a></em><a class="headerlink" href="#gen_test.infrastructure.subprocessor.SubProcessor._fake_gen" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gen_test.infrastructure.subprocessor.SubProcessor._formatter">
+<span class="sig-name descname"><span class="pre">_formatter</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="gen_test.infrastructure.generator.code_formatter.html#gen_test.infrastructure.generator.code_formatter.CodeFormatter" title="gen_test.infrastructure.generator.code_formatter.CodeFormatter"><span class="pre">CodeFormatter</span></a></em><a class="headerlink" href="#gen_test.infrastructure.subprocessor.SubProcessor._formatter" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gen_test.infrastructure.subprocessor.SubProcessor._generate_for_interface">
+<span class="sig-name descname"><span class="pre">_generate_for_interface</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">interface</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="gen_test.core.model.cpp_interface.html#gen_test.core.model.cpp_interface.CppInterface" title="gen_test.core.model.cpp_interface.CppInterface"><span class="pre">CppInterface</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="gen_test.core.model.test_suite_config.html#gen_test.core.model.test_suite_config.TestSuiteConfig" title="gen_test.core.model.test_suite_config.TestSuiteConfig"><span class="pre">TestSuiteConfig</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">list</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="_modules/gen_test/infrastructure/subprocessor.html#SubProcessor._generate_for_interface"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gen_test.infrastructure.subprocessor.SubProcessor._generate_for_interface" title="Link to this definition">¶</a></dt>
+<dd><p>Generates requested artifacts for a single C++ interface.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gen_test.infrastructure.subprocessor.SubProcessor._main_gen">
+<span class="sig-name descname"><span class="pre">_main_gen</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="gen_test.infrastructure.generator.main_generator.html#gen_test.infrastructure.generator.main_generator.MainGenerator" title="gen_test.infrastructure.generator.main_generator.MainGenerator"><span class="pre">MainGenerator</span></a></em><a class="headerlink" href="#gen_test.infrastructure.subprocessor.SubProcessor._main_gen" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gen_test.infrastructure.subprocessor.SubProcessor._mock_gen">
+<span class="sig-name descname"><span class="pre">_mock_gen</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="gen_test.core.service.imock_generator.html#gen_test.core.service.imock_generator.IMockGenerator" title="gen_test.core.service.imock_generator.IMockGenerator"><span class="pre">IMockGenerator</span></a></em><a class="headerlink" href="#gen_test.infrastructure.subprocessor.SubProcessor._mock_gen" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gen_test.infrastructure.subprocessor.SubProcessor._parser">
+<span class="sig-name descname"><span class="pre">_parser</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="gen_test.core.service.icpp_parser.html#gen_test.core.service.icpp_parser.ICppParser" title="gen_test.core.service.icpp_parser.ICppParser"><span class="pre">ICppParser</span></a></em><a class="headerlink" href="#gen_test.infrastructure.subprocessor.SubProcessor._parser" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="gen_test.infrastructure.subprocessor.SubProcessor._test_gen">
+<span class="sig-name descname"><span class="pre">_test_gen</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="gen_test.core.service.itest_generator.html#gen_test.core.service.itest_generator.ITestGenerator" title="gen_test.core.service.itest_generator.ITestGenerator"><span class="pre">ITestGenerator</span></a></em><a class="headerlink" href="#gen_test.infrastructure.subprocessor.SubProcessor._test_gen" title="Link to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gen_test.infrastructure.subprocessor.SubProcessor._write_file">
+<span class="sig-name descname"><span class="pre">_write_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">content</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="reference internal" href="_modules/gen_test/infrastructure/subprocessor.html#SubProcessor._write_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gen_test.infrastructure.subprocessor.SubProcessor._write_file" title="Link to this definition">¶</a></dt>
+<dd><p>Writes content string to file.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gen_test.infrastructure.subprocessor.SubProcessor.is_initialized">
+<span class="sig-name descname"><span class="pre">is_initialized</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="reference internal" href="_modules/gen_test/infrastructure/subprocessor.html#SubProcessor.is_initialized"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gen_test.infrastructure.subprocessor.SubProcessor.is_initialized" title="Link to this definition">¶</a></dt>
+<dd><p>Checks if subprocessor is initialized.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="gen_test.infrastructure.subprocessor.SubProcessor.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="gen_test.core.model.test_suite_config.html#gen_test.core.model.test_suite_config.TestSuiteConfig" title="gen_test.core.model.test_suite_config.TestSuiteConfig"><span class="pre">TestSuiteConfig</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="gen_test.core.model.generation_result.html#gen_test.core.model.generation_result.GenerationResult" title="gen_test.core.model.generation_result.GenerationResult"><span class="pre">GenerationResult</span></a></span></span><a class="reference internal" href="_modules/gen_test/infrastructure/subprocessor.html#SubProcessor.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#gen_test.infrastructure.subprocessor.SubProcessor.run" title="Link to this definition">¶</a></dt>
+<dd><p>Executes C++ test suite synthesis pipeline.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>params</strong> – TestSuiteConfig model.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>GenerationResult model.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <div>
+    <h3><a href="index.html">Table of Contents</a></h3>
+    <ul>
+<li><a class="reference internal" href="#">gen_test.infrastructure.subprocessor module</a><ul>
+<li><a class="reference internal" href="#gen_test.infrastructure.subprocessor.SubProcessor"><code class="docutils literal notranslate"><span class="pre">SubProcessor</span></code></a><ul>
+<li><a class="reference internal" href="#gen_test.infrastructure.subprocessor.SubProcessor._cmake_gen"><code class="docutils literal notranslate"><span class="pre">SubProcessor._cmake_gen</span></code></a></li>
+<li><a class="reference internal" href="#gen_test.infrastructure.subprocessor.SubProcessor._fake_gen"><code class="docutils literal notranslate"><span class="pre">SubProcessor._fake_gen</span></code></a></li>
+<li><a class="reference internal" href="#gen_test.infrastructure.subprocessor.SubProcessor._formatter"><code class="docutils literal notranslate"><span class="pre">SubProcessor._formatter</span></code></a></li>
+<li><a class="reference internal" href="#gen_test.infrastructure.subprocessor.SubProcessor._generate_for_interface"><code class="docutils literal notranslate"><span class="pre">SubProcessor._generate_for_interface()</span></code></a></li>
+<li><a class="reference internal" href="#gen_test.infrastructure.subprocessor.SubProcessor._main_gen"><code class="docutils literal notranslate"><span class="pre">SubProcessor._main_gen</span></code></a></li>
+<li><a class="reference internal" href="#gen_test.infrastructure.subprocessor.SubProcessor._mock_gen"><code class="docutils literal notranslate"><span class="pre">SubProcessor._mock_gen</span></code></a></li>
+<li><a class="reference internal" href="#gen_test.infrastructure.subprocessor.SubProcessor._parser"><code class="docutils literal notranslate"><span class="pre">SubProcessor._parser</span></code></a></li>
+<li><a class="reference internal" href="#gen_test.infrastructure.subprocessor.SubProcessor._test_gen"><code class="docutils literal notranslate"><span class="pre">SubProcessor._test_gen</span></code></a></li>
+<li><a class="reference internal" href="#gen_test.infrastructure.subprocessor.SubProcessor._write_file"><code class="docutils literal notranslate"><span class="pre">SubProcessor._write_file()</span></code></a></li>
+<li><a class="reference internal" href="#gen_test.infrastructure.subprocessor.SubProcessor.is_initialized"><code class="docutils literal notranslate"><span class="pre">SubProcessor.is_initialized()</span></code></a></li>
+<li><a class="reference internal" href="#gen_test.infrastructure.subprocessor.SubProcessor.run"><code class="docutils literal notranslate"><span class="pre">SubProcessor.run()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  </div>
+  <div>
+    <h4>Previous topic</h4>
+    <p class="topless"><a href="gen_test.infrastructure.parser.cpp_parser.html"
+                          title="previous chapter">gen_test.infrastructure.parser.cpp_parser module</a></p>
+  </div>
+  <div>
+    <h4>Next topic</h4>
+    <p class="topless"><a href="gen_test.setup.html"
+                          title="next chapter">gen_test.setup package</a></p>
+  </div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/gen_test.infrastructure.subprocessor.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="gen_test.setup.html" title="gen_test.setup package"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="gen_test.infrastructure.parser.cpp_parser.html" title="gen_test.infrastructure.parser.cpp_parser module"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">gen_test https://github.com/vroncevic/gen_test/releases documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="modules.html" >gen_test</a> &#187;</li>
+          <li class="nav-item nav-item-2"><a href="gen_test.html" >gen_test package</a> &#187;</li>
+          <li class="nav-item nav-item-3"><a href="gen_test.infrastructure.html" >gen_test.infrastructure package</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">gen_test.infrastructure.subprocessor module</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2026, Vladimir Roncevic &lt;elektron.ronca@gmail.com&gt;.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    </div>
+  </body>
+</html>
