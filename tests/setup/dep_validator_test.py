@@ -5,18 +5,18 @@ Module
     dep_validator_test.py
 Copyright
     Copyright (C) 2026 Vladimir Roncevic <elektron.ronca@gmail.com>
-    gen_test is free software: you can redistribute it and/or modify it
+    gen_um_test is free software: you can redistribute it and/or modify it
     under the terms of the GNU General Public License as published by the
     Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
-    gen_test is distributed in the hope that it will be useful, but
+    gen_um_test is distributed in the hope that it will be useful, but
     WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
     See the GNU General Public License for more details.
     You should have received a copy of the GNU General Public License along
     with this program. If not, see <http://www.gnu.org/licenses/>.
 Info
-    Unit tests for GenTestBundleDependenciesValidator class.
+    Unit tests for GenUmTestBundleDependenciesValidator class.
 '''
 
 from __future__ import annotations
@@ -27,14 +27,14 @@ from unittest.mock import Mock
 from ats_utilities.base.setup.bundle import BaseBundle
 from ats_utilities.exceptions import ATSTypeError, ATSValueError
 
-from gen_test.setup.dep_validator import GenTestBundleDependenciesValidator
-from gen_test.setup.dependencies import GenTestBundleDependencies
+from gen_um_test.setup.dep_validator import GenUmTestBundleDependenciesValidator
+from gen_um_test.setup.dependencies import GenUmTestBundleDependencies
 
 __author__ = 'Vladimir Roncevic'
-__copyright__ = '(C) 2026, https://vroncevic.github.io/gen_test'
+__copyright__ = '(C) 2026, https://vroncevic.github.io/gen_um_test'
 __credits__ = ['Vladimir Roncevic', 'Python Software Foundation']
-__license__ = 'https://github.com/vroncevic/gen_test/blob/dev/LICENSE'
-__version__ = '1.0.1'
+__license__ = 'https://github.com/vroncevic/gen_um_test/blob/dev/LICENSE'
+__version__ = '1.0.2'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -88,9 +88,9 @@ class DummyCLI:
         return True
 
 
-class TestGenTestBundleDependenciesValidator(TestCase):
+class TestGenUmTestBundleDependenciesValidator(TestCase):
     '''
-        Unit tests for GenTestBundleDependenciesValidator.
+        Unit tests for GenUmTestBundleDependenciesValidator.
     '''
 
     def test_validate_success(self) -> None:
@@ -102,26 +102,26 @@ class TestGenTestBundleDependenciesValidator(TestCase):
         dummy_subprocessor = DummySubProcessor()
         dummy_cli = DummyCLI()
 
-        deps: GenTestBundleDependencies = {
+        deps: GenUmTestBundleDependencies = {
             'base': mock_base,
             'service': dummy_service,
             'subprocessor': dummy_subprocessor,
             'cli': dummy_cli
         }
-        GenTestBundleDependenciesValidator.validate(deps)
-        self.assertTrue(GenTestBundleDependenciesValidator.is_valid(deps))
+        GenUmTestBundleDependenciesValidator.validate(deps)
+        self.assertTrue(GenUmTestBundleDependenciesValidator.is_valid(deps))
 
     def test_validate_none_or_invalid_type(self) -> None:
         '''
             Tests failure when dependencies is None or wrong type.
         '''
         with self.assertRaises(ATSValueError):
-            GenTestBundleDependenciesValidator.validate(None)  # type: ignore[arg-type]
-        self.assertFalse(GenTestBundleDependenciesValidator.is_valid(None))  # type: ignore[arg-type]
+            GenUmTestBundleDependenciesValidator.validate(None)  # type: ignore[arg-type]
+        self.assertFalse(GenUmTestBundleDependenciesValidator.is_valid(None))  # type: ignore[arg-type]
 
         with self.assertRaises(ATSTypeError):
-            GenTestBundleDependenciesValidator.validate('invalid')  # type: ignore[arg-type]
-        self.assertFalse(GenTestBundleDependenciesValidator.is_valid('invalid'))  # type: ignore[arg-type]
+            GenUmTestBundleDependenciesValidator.validate('invalid')  # type: ignore[arg-type]
+        self.assertFalse(GenUmTestBundleDependenciesValidator.is_valid('invalid'))  # type: ignore[arg-type]
 
     def test_validate_missing_dependency(self) -> None:
         '''
@@ -133,5 +133,5 @@ class TestGenTestBundleDependenciesValidator(TestCase):
             'subprocessor': DummySubProcessor()
         }
         with self.assertRaises(ATSValueError):
-            GenTestBundleDependenciesValidator.validate(deps)  # type: ignore[arg-type]
-        self.assertFalse(GenTestBundleDependenciesValidator.is_valid(deps))  # type: ignore[arg-type]
+            GenUmTestBundleDependenciesValidator.validate(deps)  # type: ignore[arg-type]
+        self.assertFalse(GenUmTestBundleDependenciesValidator.is_valid(deps))  # type: ignore[arg-type]

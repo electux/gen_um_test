@@ -5,18 +5,18 @@ Module
     validator_test.py
 Copyright
     Copyright (C) 2026 Vladimir Roncevic <elektron.ronca@gmail.com>
-    gen_test is free software: you can redistribute it and/or modify it
+    gen_um_test is free software: you can redistribute it and/or modify it
     under the terms of the GNU General Public License as published by the
     Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
-    gen_test is distributed in the hope that it will be useful, but
+    gen_um_test is distributed in the hope that it will be useful, but
     WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
     See the GNU General Public License for more details.
     You should have received a copy of the GNU General Public License along
     with this program. If not, see <http://www.gnu.org/licenses/>.
 Info
-    Unit tests for GenTestBundleValidator class.
+    Unit tests for GenUmTestBundleValidator class.
 '''
 
 from __future__ import annotations
@@ -27,14 +27,14 @@ from unittest.mock import Mock
 from ats_utilities.base.setup.bundle import BaseBundle
 from ats_utilities.exceptions import ATSTypeError, ATSValueError
 
-from gen_test.setup.bundle import GenTestBundle
-from gen_test.setup.validator import GenTestBundleValidator
+from gen_um_test.setup.bundle import GenUmTestBundle
+from gen_um_test.setup.validator import GenUmTestBundleValidator
 
 __author__ = 'Vladimir Roncevic'
-__copyright__ = '(C) 2026, https://vroncevic.github.io/gen_test'
+__copyright__ = '(C) 2026, https://vroncevic.github.io/gen_um_test'
 __credits__ = ['Vladimir Roncevic', 'Python Software Foundation']
-__license__ = 'https://github.com/vroncevic/gen_test/blob/dev/LICENSE'
-__version__ = '1.0.1'
+__license__ = 'https://github.com/vroncevic/gen_um_test/blob/dev/LICENSE'
+__version__ = '1.0.2'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -88,9 +88,9 @@ class DummyCLI:
         return True
 
 
-class TestGenTestBundleValidator(TestCase):
+class TestGenUmTestBundleValidator(TestCase):
     '''
-        Unit tests for GenTestBundleValidator.
+        Unit tests for GenUmTestBundleValidator.
     '''
 
     def test_validate_success(self) -> None:
@@ -102,26 +102,26 @@ class TestGenTestBundleValidator(TestCase):
         dummy_subprocessor = DummySubProcessor()
         dummy_cli = DummyCLI()
 
-        bundle = GenTestBundle(
+        bundle = GenUmTestBundle(
             base=mock_base,
             service=dummy_service,
             subprocessor=dummy_subprocessor,
             cli=dummy_cli
         )
-        GenTestBundleValidator.validate(bundle)
-        self.assertTrue(GenTestBundleValidator.is_valid(bundle))
+        GenUmTestBundleValidator.validate(bundle)
+        self.assertTrue(GenUmTestBundleValidator.is_valid(bundle))
 
     def test_validate_none_or_invalid_type(self) -> None:
         '''
-            Tests failure on None or non-GenTestBundle instance.
+            Tests failure on None or non-GenUmTestBundle instance.
         '''
         with self.assertRaises(ATSValueError):
-            GenTestBundleValidator.validate(None)  # type: ignore[arg-type]
-        self.assertFalse(GenTestBundleValidator.is_valid(None))  # type: ignore[arg-type]
+            GenUmTestBundleValidator.validate(None)  # type: ignore[arg-type]
+        self.assertFalse(GenUmTestBundleValidator.is_valid(None))  # type: ignore[arg-type]
 
         with self.assertRaises(ATSTypeError):
-            GenTestBundleValidator.validate('invalid')  # type: ignore[arg-type]
-        self.assertFalse(GenTestBundleValidator.is_valid('invalid'))  # type: ignore[arg-type]
+            GenUmTestBundleValidator.validate('invalid')  # type: ignore[arg-type]
+        self.assertFalse(GenUmTestBundleValidator.is_valid('invalid'))  # type: ignore[arg-type]
 
     def test_validate_invalid_component_types(self) -> None:
         '''
@@ -133,19 +133,19 @@ class TestGenTestBundleValidator(TestCase):
         dummy_cli = DummyCLI()
 
         with self.assertRaises((ATSValueError, ATSTypeError)):
-            bundle = GenTestBundle(
+            bundle = GenUmTestBundle(
                 base='invalid',  # type: ignore[arg-type]
                 service=dummy_service,
                 subprocessor=dummy_subprocessor,
                 cli=dummy_cli
             )
-            GenTestBundleValidator.validate(bundle)
+            GenUmTestBundleValidator.validate(bundle)
 
         with self.assertRaises((ATSValueError, ATSTypeError)):
-            bundle = GenTestBundle(
+            bundle = GenUmTestBundle(
                 base=mock_base,
                 service='invalid',  # type: ignore[arg-type]
                 subprocessor=dummy_subprocessor,
                 cli=dummy_cli
             )
-            GenTestBundleValidator.validate(bundle)
+            GenUmTestBundleValidator.validate(bundle)

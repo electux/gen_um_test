@@ -5,11 +5,11 @@ Module
     conf.py
 Copyright
     Copyright (C) 2026 Vladimir Roncevic <elektron.ronca@gmail.com>
-    gen_test is free software: you can redistribute it and/or modify it
+    gen_um_test is free software: you can redistribute it and/or modify it
     under the terms of the GNU General Public License as published by the
     Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
-    gen_test is distributed in the hope that it will be useful, but
+    gen_um_test is distributed in the hope that it will be useful, but
     WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
     See the GNU General Public License for more details.
@@ -26,11 +26,11 @@ from sys import path
 
 path.insert(0, abspath('../../'))
 
-project: str = 'gen_test'
+project: str = 'gen_um_test'
 project_copyright: str = '2026, Vladimir Roncevic <elektron.ronca@gmail.com>'
 author: str = 'Vladimir Roncevic <elektron.ronca@gmail.com>'
-version: str = '1.0.1'
-release: str = 'https://github.com/electux/gen_test/releases'
+version: str = '1.0.2'
+release: str = 'https://github.com/electux/gen_um_test/releases'
 extensions: list[str] = ['sphinx.ext.autodoc', 'sphinx.ext.viewcode']
 templates_path: list[str] = ['_templates']
 source_suffix: str = '.rst'
@@ -40,18 +40,18 @@ exclude_patterns: list[str] = []
 pygments_style: str = 'sphinx'
 html_theme: str = 'classic'
 html_static_path: list[str] = ['_static']
-htmlhelp_basename: str = 'gen_testdoc'
+htmlhelp_basename: str = 'gen_um_testdoc'
 latex_elements: dict[object, object] = {}
 latex_documents: list[tuple[object, ...]] = [(
-    root_doc, 'gen_test.tex', 'gen_test Documentation',
+    root_doc, 'gen_um_test.tex', 'gen_um_test Documentation',
     'Vladimir Roncevic \\textless{}elektron.ronca@gmail.com\\textgreater{}',
     'manual'
 )]
 man_pages: list[tuple[object, ...]] = [(
-    root_doc, 'gen_test', 'gen_test Documentation', [author], 1
+    root_doc, 'gen_um_test', 'gen_um_test Documentation', [author], 1
 )]
 texinfo_documents: list[tuple[object, ...]] = [(
-    root_doc, 'gen_test', 'gen_test Documentation', author, 'gen_test',
+    root_doc, 'gen_um_test', 'gen_um_test Documentation', author, 'gen_um_test',
     'Generate GoogleTest/GoogleMock test suites for C++ interfaces.', 'Miscellaneous'
 )]
 epub_title: str = project

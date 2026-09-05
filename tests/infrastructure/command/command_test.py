@@ -5,11 +5,11 @@ Module
     command_test.py
 Copyright
     Copyright (C) 2026 Vladimir Roncevic <elektron.ronca@gmail.com>
-    gen_test is free software: you can redistribute it and/or modify it
+    gen_um_test is free software: you can redistribute it and/or modify it
     under the terms of the GNU General Public License as published by the
     Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
-    gen_test is distributed in the hope that it will be useful, but
+    gen_um_test is distributed in the hope that it will be useful, but
     WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
     See the GNU General Public License for more details.
@@ -24,18 +24,18 @@ from __future__ import annotations
 from unittest import TestCase
 from unittest.mock import Mock
 
-from gen_test.core.model.generation_result import GenerationResult
-from gen_test.infrastructure.command.cmake_command_definition import CMakeCommandDefinition
-from gen_test.infrastructure.command.cmake_command_executor import CMakeCommandExecutor
-from gen_test.infrastructure.command.command import CommandBundle
-from gen_test.infrastructure.command.fake_command_definition import FakeCommandDefinition
-from gen_test.infrastructure.command.fake_command_executor import FakeCommandExecutor
-from gen_test.infrastructure.command.mock_command_definition import MockCommandDefinition
-from gen_test.infrastructure.command.mock_command_executor import MockCommandExecutor
-from gen_test.infrastructure.command.suite_command_definition import SuiteCommandDefinition
-from gen_test.infrastructure.command.suite_command_executor import SuiteCommandExecutor
-from gen_test.infrastructure.command.test_command_definition import TestCommandDefinition
-from gen_test.infrastructure.command.test_command_executor import TestCommandExecutor
+from gen_um_test.core.model.generation_result import GenerationResult
+from gen_um_test.infrastructure.command.cmake_command_definition import CMakeCommandDefinition
+from gen_um_test.infrastructure.command.cmake_command_executor import CMakeCommandExecutor
+from gen_um_test.infrastructure.command.command import CommandBundle
+from gen_um_test.infrastructure.command.fake_command_definition import FakeCommandDefinition
+from gen_um_test.infrastructure.command.fake_command_executor import FakeCommandExecutor
+from gen_um_test.infrastructure.command.mock_command_definition import MockCommandDefinition
+from gen_um_test.infrastructure.command.mock_command_executor import MockCommandExecutor
+from gen_um_test.infrastructure.command.suite_command_definition import SuiteCommandDefinition
+from gen_um_test.infrastructure.command.suite_command_executor import SuiteCommandExecutor
+from gen_um_test.infrastructure.command.test_command_definition import TestCommandDefinition
+from gen_um_test.infrastructure.command.test_command_executor import TestCommandExecutor
 
 
 class TestCommands(TestCase):

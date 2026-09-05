@@ -5,18 +5,18 @@ Module
     setup.py
 Copyright
     Copyright (C) 2026 Vladimir Roncevic <elektron.ronca@gmail.com>
-    gen_test is free software: you can redistribute it and/or modify it
+    gen_um_test is free software: you can redistribute it and/or modify it
     under the terms of the GNU General Public License as published by the
     Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
-    gen_test is distributed in the hope that it will be useful, but
+    gen_um_test is distributed in the hope that it will be useful, but
     WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
     See the GNU General Public License for more details.
     You should have received a copy of the GNU General Public License along
     with this program. If not, see <http://www.gnu.org/licenses/>.
 Info
-    Defines setup for tool gen_test.
+    Defines setup for tool gen_um_test.
 '''
 
 from __future__ import annotations
@@ -26,10 +26,10 @@ from os.path import abspath, dirname, join, relpath
 from setuptools import setup, find_packages
 
 __author__ = 'Vladimir Roncevic'
-__copyright__ = '(C) 2026, https://vroncevic.github.io/gen_test'
+__copyright__ = '(C) 2026, https://vroncevic.github.io/gen_um_test'
 __credits__ = ['Vladimir Roncevic', 'Python Software Foundation']
-__license__ = 'https://github.com/vroncevic/gen_test/blob/dev/LICENSE'
-__version__ = '1.0.1'
+__license__ = 'https://github.com/vroncevic/gen_um_test/blob/dev/LICENSE'
+__version__ = '1.0.2'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -69,12 +69,12 @@ def find_package_data(pkg: str) -> list[str]:
     return package_data
 
 setup(
-    name='gen_test',
-    version='1.0.1',
+    name='gen_um_test',
+    version='1.0.2',
     description='Python tool for generating Google C++ unit test mocks and test suites from interfaces',
     author='Vladimir Roncevic',
     author_email='elektron.ronca@gmail.com',
-    url='https://vroncevic.github.io/gen_test',
+    url='https://vroncevic.github.io/gen_um_test',
     license='GPL-3.0-or-later',
     long_description=long_description,
     long_description_content_type='text/markdown',
@@ -83,5 +83,5 @@ setup(
     classifiers=PYP_CLASSIFIERS,
     packages=find_packages(exclude=['tests', 'tests.*', '*.*.pyc', '*.pyo']),
     install_requires=['ats-utilities'],
-    package_data={'gen_test': find_package_data('gen_test')}
+    package_data={'gen_um_test': find_package_data('gen_um_test')}
 )

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+
+<html lang="en" data-content_root="../../../../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>gen_um_test.infrastructure.generator.template_provider &#8212; gen_um_test https://github.com/electux/gen_um_test/releases documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../../../../_static/classic.css?v=514cf933" />
+    
+    <script src="../../../../_static/documentation_options.js?v=88b91c3b"></script>
+    <script src="../../../../_static/doctools.js?v=888ff710"></script>
+    <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">gen_um_test https://github.com/electux/gen_um_test/releases documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" accesskey="U">Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">gen_um_test.infrastructure.generator.template_provider</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for gen_um_test.infrastructure.generator.template_provider</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: UTF-8 -*-</span>
+
+<span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">Module</span>
+<span class="sd">    template_provider.py</span>
+<span class="sd">Copyright</span>
+<span class="sd">    Copyright (C) 2026 Vladimir Roncevic &lt;elektron.ronca@gmail.com&gt;</span>
+<span class="sd">    gen_um_test is free software: you can redistribute it and/or modify it</span>
+<span class="sd">    under the terms of the GNU General Public License as published by the</span>
+<span class="sd">    Free Software Foundation, either version 3 of the License, or</span>
+<span class="sd">    (at your option) any later version.</span>
+<span class="sd">    gen_um_test is distributed in the hope that it will be useful, but</span>
+<span class="sd">    WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="sd">    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.</span>
+<span class="sd">    See the GNU General Public License for more details.</span>
+<span class="sd">    You should have received a copy of the GNU General Public License along</span>
+<span class="sd">    with this program. If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+<span class="sd">Info</span>
+<span class="sd">    Template provider using scheme.json and templates.tgz archive via ats_utilities loader.</span>
+<span class="sd">&#39;&#39;&#39;</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">annotations</span>
+
+<span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">dirname</span><span class="p">,</span> <span class="n">exists</span><span class="p">,</span> <span class="n">join</span><span class="p">,</span> <span class="n">realpath</span>
+<span class="kn">from</span> <span class="nn">tarfile</span> <span class="kn">import</span> <span class="nb">open</span> <span class="k">as</span> <span class="n">tar_open</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">ClassVar</span>
+
+<span class="kn">from</span> <span class="nn">ats_utilities.config_io.loader.engine</span> <span class="kn">import</span> <span class="n">Loader</span>
+<span class="kn">from</span> <span class="nn">ats_utilities.config_io.setup.factory</span> <span class="kn">import</span> <span class="n">ConfigIOBundleFactory</span>
+<span class="kn">from</span> <span class="nn">ats_utilities.config_io.setup.options</span> <span class="kn">import</span> <span class="n">ConfigIOBundleOptions</span>
+<span class="kn">from</span> <span class="nn">ats_utilities.context.factory</span> <span class="kn">import</span> <span class="n">ContextBundleFactory</span>
+<span class="kn">from</span> <span class="nn">ats_utilities.utils.reflection</span> <span class="kn">import</span> <span class="n">to_str</span>
+
+<span class="n">__author__</span> <span class="o">=</span> <span class="s1">&#39;Vladimir Roncevic&#39;</span>
+<span class="n">__copyright__</span> <span class="o">=</span> <span class="s1">&#39;(C) 2026, https://vroncevic.github.io/gen_um_test&#39;</span>
+<span class="n">__credits__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Vladimir Roncevic&#39;</span><span class="p">,</span> <span class="s1">&#39;Python Software Foundation&#39;</span><span class="p">]</span>
+<span class="n">__license__</span> <span class="o">=</span> <span class="s1">&#39;https://github.com/vroncevic/gen_um_test/blob/dev/LICENSE&#39;</span>
+<span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;1.0.2&#39;</span>
+<span class="n">__maintainer__</span> <span class="o">=</span> <span class="s1">&#39;Vladimir Roncevic&#39;</span>
+<span class="n">__email__</span> <span class="o">=</span> <span class="s1">&#39;elektron.ronca@gmail.com&#39;</span>
+<span class="n">__status__</span> <span class="o">=</span> <span class="s1">&#39;Updated&#39;</span>
+
+
+<div class="viewcode-block" id="TemplateProvider">
+<a class="viewcode-back" href="../../../../gen_um_test.infrastructure.generator.template_provider.html#gen_um_test.infrastructure.generator.template_provider.TemplateProvider">[docs]</a>
+<span class="k">class</span> <span class="nc">TemplateProvider</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">        Provides template contents from templates.tgz referenced by scheme.json.</span>
+
+<span class="sd">        It defines:</span>
+
+<span class="sd">            :attributes:</span>
+<span class="sd">                | _scheme_file - Path to scheme.json configuration file.</span>
+<span class="sd">                | _archive_file - Path to templates.tgz archive file.</span>
+<span class="sd">                | _cache - In-memory cache of loaded templates.</span>
+<span class="sd">            :methods:</span>
+<span class="sd">                | __init__ - Initializes the template provider.</span>
+<span class="sd">                | get_template - Retrieves template text by key.</span>
+<span class="sd">                | is_initialized - Checks if template provider is initialized.</span>
+<span class="sd">                | __str__ - String representation of provider.</span>
+<span class="sd">    &#39;&#39;&#39;</span>
+
+    <span class="n">_DEFAULT_CONFIG_DIR</span><span class="p">:</span> <span class="n">ClassVar</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">dirname</span><span class="p">(</span><span class="n">dirname</span><span class="p">(</span><span class="n">realpath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))),</span> <span class="s1">&#39;config&#39;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            Initializes template provider.</span>
+
+<span class="sd">            :param config_dir: Optional custom configuration directory path.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">base_dir</span> <span class="o">=</span> <span class="n">config_dir</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_DEFAULT_CONFIG_DIR</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_scheme_file</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">base_dir</span><span class="p">,</span> <span class="s1">&#39;scheme.json&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_archive_file</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">base_dir</span><span class="p">,</span> <span class="s1">&#39;templates.tgz&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_templates_dir</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="n">dirname</span><span class="p">(</span><span class="n">dirname</span><span class="p">(</span><span class="n">realpath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))),</span> <span class="s1">&#39;templates&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_scheme_data</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">object</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_load_scheme</span><span class="p">()</span>
+
+<div class="viewcode-block" id="TemplateProvider._load_scheme">
+<a class="viewcode-back" href="../../../../gen_um_test.infrastructure.generator.template_provider.html#gen_um_test.infrastructure.generator.template_provider.TemplateProvider._load_scheme">[docs]</a>
+    <span class="k">def</span> <span class="nf">_load_scheme</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">object</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            Loads scheme.json using ats_utilities Loader.</span>
+
+<span class="sd">            :return: Loaded configuration dictionary or empty dictionary.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_scheme_file</span><span class="p">):</span>
+            <span class="k">return</span> <span class="p">{}</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">ctx</span> <span class="o">=</span> <span class="n">ContextBundleFactory</span><span class="o">.</span><span class="n">create_bundle</span><span class="p">()</span>
+            <span class="n">opts</span> <span class="o">=</span> <span class="n">ConfigIOBundleOptions</span><span class="p">(</span><span class="n">file_path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_scheme_file</span><span class="p">,</span> <span class="n">context_bundle</span><span class="o">=</span><span class="n">ctx</span><span class="p">)</span>
+            <span class="n">bundle</span> <span class="o">=</span> <span class="n">ConfigIOBundleFactory</span><span class="o">.</span><span class="n">create_bundle</span><span class="p">(</span><span class="n">opts</span><span class="p">)</span>
+            <span class="n">loader</span> <span class="o">=</span> <span class="n">Loader</span><span class="p">(</span><span class="n">bundle</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">loader</span><span class="o">.</span><span class="n">load_configuration</span><span class="p">()</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{}</span></div>
+
+
+<div class="viewcode-block" id="TemplateProvider.get_template">
+<a class="viewcode-back" href="../../../../gen_um_test.infrastructure.generator.template_provider.html#gen_um_test.infrastructure.generator.template_provider.TemplateProvider.get_template">[docs]</a>
+    <span class="k">def</span> <span class="nf">get_template</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            Retrieves template content by key.</span>
+
+<span class="sd">            :param template_key: Key of template (&#39;mock&#39;, &#39;fake&#39;, &#39;test&#39;, &#39;cmake&#39;, &#39;main&#39;).</span>
+<span class="sd">            :return: Template string content.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="n">template_key</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="n">template_key</span><span class="p">]</span>
+
+        <span class="n">content</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extract_from_archive</span><span class="p">(</span><span class="n">template_key</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">content</span><span class="p">:</span>
+            <span class="n">content</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_read_from_filesystem</span><span class="p">(</span><span class="n">template_key</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">content</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_cache</span><span class="p">[</span><span class="n">template_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">content</span>
+
+        <span class="k">return</span> <span class="n">content</span></div>
+
+
+<div class="viewcode-block" id="TemplateProvider._extract_from_archive">
+<a class="viewcode-back" href="../../../../gen_um_test.infrastructure.generator.template_provider.html#gen_um_test.infrastructure.generator.template_provider.TemplateProvider._extract_from_archive">[docs]</a>
+    <span class="k">def</span> <span class="nf">_extract_from_archive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            Extracts template file content directly from templates.tgz.</span>
+
+<span class="sd">            :param template_key: Key of template.</span>
+<span class="sd">            :return: Template text or empty string.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">exists</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_archive_file</span><span class="p">):</span>
+            <span class="k">return</span> <span class="s1">&#39;&#39;</span>
+
+        <span class="n">templates_cfg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_scheme_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;templates&#39;</span><span class="p">,</span> <span class="p">{})</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_scheme_data</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="k">else</span> <span class="p">{}</span>
+        <span class="n">files_map</span> <span class="o">=</span> <span class="n">templates_cfg</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;files&#39;</span><span class="p">,</span> <span class="p">{})</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">templates_cfg</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="k">else</span> <span class="p">{}</span>
+        <span class="n">file_name</span> <span class="o">=</span> <span class="n">files_map</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">template_key</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">template_key</span><span class="si">}</span><span class="s1">.template&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">files_map</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)</span> <span class="k">else</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">template_key</span><span class="si">}</span><span class="s1">.template&#39;</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">with</span> <span class="n">tar_open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_archive_file</span><span class="p">,</span> <span class="s1">&#39;r:gz&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">archive</span><span class="p">:</span>
+                <span class="n">entry</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;templates/</span><span class="si">{</span><span class="n">file_name</span><span class="si">}</span><span class="s1">&#39;</span>
+                <span class="n">member</span> <span class="o">=</span> <span class="n">archive</span><span class="o">.</span><span class="n">getmember</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span>
+                <span class="n">extracted</span> <span class="o">=</span> <span class="n">archive</span><span class="o">.</span><span class="n">extractfile</span><span class="p">(</span><span class="n">member</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">extracted</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">extracted</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;&#39;</span>
+
+        <span class="k">return</span> <span class="s1">&#39;&#39;</span></div>
+
+
+<div class="viewcode-block" id="TemplateProvider._read_from_filesystem">
+<a class="viewcode-back" href="../../../../gen_um_test.infrastructure.generator.template_provider.html#gen_um_test.infrastructure.generator.template_provider.TemplateProvider._read_from_filesystem">[docs]</a>
+    <span class="k">def</span> <span class="nf">_read_from_filesystem</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">template_key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            Fallback reader from filesystem templates directory.</span>
+
+<span class="sd">            :param template_key: Key of template.</span>
+<span class="sd">            :return: Template text or empty string.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="n">fallback_file</span> <span class="o">=</span> <span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_templates_dir</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">template_key</span><span class="si">}</span><span class="s1">.template&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">exists</span><span class="p">(</span><span class="n">fallback_file</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fallback_file</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">handle</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="n">handle</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="k">return</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">return</span> <span class="s1">&#39;&#39;</span></div>
+
+
+<div class="viewcode-block" id="TemplateProvider.is_initialized">
+<a class="viewcode-back" href="../../../../gen_um_test.infrastructure.generator.template_provider.html#gen_um_test.infrastructure.generator.template_provider.TemplateProvider.is_initialized">[docs]</a>
+    <span class="k">def</span> <span class="nf">is_initialized</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            Checks if provider is initialized.</span>
+
+<span class="sd">            :return: True if ready to serve templates, False otherwise.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="kc">True</span></div>
+
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">            Returns string representation of TemplateProvider.</span>
+
+<span class="sd">            :return: String representation.</span>
+<span class="sd">        &#39;&#39;&#39;</span>
+        <span class="k">return</span> <span class="n">to_str</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></div>
+
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../../../../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../../../../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../../../../index.html">gen_um_test https://github.com/electux/gen_um_test/releases documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="../../../index.html" >Module code</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">gen_um_test.infrastructure.generator.template_provider</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+    &#169; Copyright 2026, Vladimir Roncevic &lt;elektron.ronca@gmail.com&gt;.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 7.2.6.
+    </div>
+  </body>
+</html>
