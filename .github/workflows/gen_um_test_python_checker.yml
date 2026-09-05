@@ -1,0 +1,28 @@
+name: gen_um_test_python_checker
+
+on:
+  push:
+    branches: [ master, main ]
+    paths:
+      - 'gen_um_test/**/*.py'
+      - 'setup.py'
+  pull_request:
+    branches: [ master, main ]
+    paths:
+      - 'gen_um_test/**/*.py'
+      - 'setup.py'
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Check module length and line limits
+        run: |
+          python3 gates/gates/limits_checker.py gen_um_test

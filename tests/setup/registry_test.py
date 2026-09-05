@@ -5,18 +5,18 @@ Module
     registry_test.py
 Copyright
     Copyright (C) 2026 Vladimir Roncevic <elektron.ronca@gmail.com>
-    gen_test is free software: you can redistribute it and/or modify it
+    gen_um_test is free software: you can redistribute it and/or modify it
     under the terms of the GNU General Public License as published by the
     Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
-    gen_test is distributed in the hope that it will be useful, but
+    gen_um_test is distributed in the hope that it will be useful, but
     WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
     See the GNU General Public License for more details.
     You should have received a copy of the GNU General Public License along
     with this program. If not, see <http://www.gnu.org/licenses/>.
 Info
-    Unit tests for GenTestBundleRegistry class.
+    Unit tests for GenUmTestBundleRegistry class.
 '''
 
 from __future__ import annotations
@@ -27,15 +27,15 @@ from unittest.mock import Mock
 from ats_utilities.base.setup.bundle import BaseBundle
 from ats_utilities.exceptions import ATSTypeError, ATSValueError
 
-from gen_test.setup.bundle import GenTestBundle
-from gen_test.setup.dependencies import GenTestBundleDependencies
-from gen_test.setup.registry import GenTestBundleRegistry
+from gen_um_test.setup.bundle import GenUmTestBundle
+from gen_um_test.setup.dependencies import GenUmTestBundleDependencies
+from gen_um_test.setup.registry import GenUmTestBundleRegistry
 
 __author__ = 'Vladimir Roncevic'
-__copyright__ = '(C) 2026, https://vroncevic.github.io/gen_test'
+__copyright__ = '(C) 2026, https://vroncevic.github.io/gen_um_test'
 __credits__ = ['Vladimir Roncevic', 'Python Software Foundation']
-__license__ = 'https://github.com/vroncevic/gen_test/blob/dev/LICENSE'
-__version__ = '1.0.1'
+__license__ = 'https://github.com/vroncevic/gen_um_test/blob/dev/LICENSE'
+__version__ = '1.0.2'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -89,28 +89,28 @@ class DummyCLI:
         return True
 
 
-class TestGenTestBundleRegistry(TestCase):
+class TestGenUmTestBundleRegistry(TestCase):
     '''
-        Unit tests for GenTestBundleRegistry.
+        Unit tests for GenUmTestBundleRegistry.
     '''
 
     def test_create_bundle_success(self) -> None:
         '''
-            Tests creating GenTestBundle from dependencies.
+            Tests creating GenUmTestBundle from dependencies.
         '''
         mock_base = Mock(spec=BaseBundle)
         dummy_service = DummyService()
         dummy_subprocessor = DummySubProcessor()
         dummy_cli = DummyCLI()
 
-        deps: GenTestBundleDependencies = {
+        deps: GenUmTestBundleDependencies = {
             'base': mock_base,
             'service': dummy_service,
             'subprocessor': dummy_subprocessor,
             'cli': dummy_cli
         }
-        bundle = GenTestBundleRegistry.create_bundle(deps)
-        self.assertIsInstance(bundle, GenTestBundle)
+        bundle = GenUmTestBundleRegistry.create_bundle(deps)
+        self.assertIsInstance(bundle, GenUmTestBundle)
         self.assertEqual(bundle.base, mock_base)
 
     def test_create_bundle_invalid_dependencies(self) -> None:
@@ -118,10 +118,10 @@ class TestGenTestBundleRegistry(TestCase):
             Tests failure on None or invalid dependencies.
         '''
         with self.assertRaises((ATSValueError, ATSTypeError)):
-            GenTestBundleRegistry.create_bundle(None)  # type: ignore[arg-type]
+            GenUmTestBundleRegistry.create_bundle(None)  # type: ignore[arg-type]
 
     def test_get_version(self) -> None:
         '''
             Tests get_version method.
         '''
-        self.assertEqual(GenTestBundleRegistry.get_version(), '1.0.1')
+        self.assertEqual(GenUmTestBundleRegistry.get_version(), '1.0.2')

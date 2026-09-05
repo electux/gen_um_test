@@ -5,11 +5,11 @@ Module
     code_formatter_test.py
 Copyright
     Copyright (C) 2026 Vladimir Roncevic <elektron.ronca@gmail.com>
-    gen_test is free software: you can redistribute it and/or modify it
+    gen_um_test is free software: you can redistribute it and/or modify it
     under the terms of the GNU General Public License as published by the
     Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
-    gen_test is distributed in the hope that it will be useful, but
+    gen_um_test is distributed in the hope that it will be useful, but
     WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
     See the GNU General Public License for more details.
@@ -27,7 +27,7 @@ from tempfile import NamedTemporaryFile
 from unittest import TestCase
 from unittest.mock import patch
 
-from gen_test.infrastructure.generator.code_formatter import CodeFormatter
+from gen_um_test.infrastructure.generator.code_formatter import CodeFormatter
 
 
 class TestCodeFormatter(TestCase):
@@ -72,6 +72,6 @@ class TestCodeFormatter(TestCase):
             Tests exception handling in format_file.
         '''
         formatter = CodeFormatter()
-        with patch('gen_test.infrastructure.generator.code_formatter.run_process') as mock_run:
+        with patch('gen_um_test.infrastructure.generator.code_formatter.run_process') as mock_run:
             mock_run.side_effect = OSError('Execution failed')
             self.assertFalse(formatter.format_file('any_file.h'))

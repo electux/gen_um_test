@@ -5,18 +5,18 @@ Module
     engine_test.py
 Copyright
     Copyright (C) 2026 Vladimir Roncevic <elektron.ronca@gmail.com>
-    gen_test is free software: you can redistribute it and/or modify it
+    gen_um_test is free software: you can redistribute it and/or modify it
     under the terms of the GNU General Public License as published by the
     Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
-    gen_test is distributed in the hope that it will be useful, but
+    gen_um_test is distributed in the hope that it will be useful, but
     WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
     See the GNU General Public License for more details.
     You should have received a copy of the GNU General Public License along
     with this program. If not, see <http://www.gnu.org/licenses/>.
 Info
-    Unit tests for GenTest root engine class.
+    Unit tests for GenUmTest root engine class.
 '''
 
 from __future__ import annotations
@@ -29,18 +29,18 @@ from ats_utilities.base.setup.options import BaseBundleOptions
 from ats_utilities.context.factory import ContextBundleFactory
 from ats_utilities.exceptions import ATSValueError
 
-from gen_test.core.service.iservice import IService
-from gen_test.core.service.isubprocessor import ISubProcessor
-from gen_test.engine import GenTest
-from gen_test.infrastructure.cli.icli import ICLI
-from gen_test.setup.bundle import GenTestBundle
-from gen_test.setup.factory import GenTestBundleFactory
+from gen_um_test.core.service.iservice import IService
+from gen_um_test.core.service.isubprocessor import ISubProcessor
+from gen_um_test.engine import GenUmTest
+from gen_um_test.infrastructure.cli.icli import ICLI
+from gen_um_test.setup.bundle import GenUmTestBundle
+from gen_um_test.setup.factory import GenUmTestBundleFactory
 
 __author__ = 'Vladimir Roncevic'
-__copyright__ = '(C) 2026, https://vroncevic.github.io/gen_test'
+__copyright__ = '(C) 2026, https://vroncevic.github.io/gen_um_test'
 __credits__ = ['Vladimir Roncevic', 'Python Software Foundation']
-__license__ = 'https://github.com/vroncevic/gen_test/blob/dev/LICENSE'
-__version__ = '1.0.1'
+__license__ = 'https://github.com/vroncevic/gen_um_test/blob/dev/LICENSE'
+__version__ = '1.0.2'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
@@ -107,24 +107,24 @@ class DummyCLI(ICLI):
         return 'DummyCLI'
 
 
-class TestGenTest(TestCase):
+class TestGenUmTest(TestCase):
     '''
-        Unit tests for GenTest engine.
+        Unit tests for GenUmTest engine.
     '''
 
     def test_engine_init_success(self) -> None:
         '''
             Tests engine successful initialization.
         '''
-        bundle = GenTestBundleFactory.create_bundle()
-        engine = GenTest(bundle)
+        bundle = GenUmTestBundleFactory.create_bundle()
+        engine = GenUmTest(bundle)
         self.assertTrue(engine.is_initialized())
 
     def test_engine_init_fail_validation(self) -> None:
         '''
             Tests engine initialization failure on invalid bundle.
         '''
-        engine = GenTest(None)  # type: ignore[arg-type]
+        engine = GenUmTest(None)  # type: ignore[arg-type]
         self.assertFalse(engine.is_initialized())
 
     def test_engine_process_success(self) -> None:
@@ -134,7 +134,7 @@ class TestGenTest(TestCase):
         context_bundle = ContextBundleFactory.create_bundle()
         mock_base = BaseBundleFactory.create_bundle(
             options=BaseBundleOptions(
-                info_file='gen_test/infrastructure/config/gen_test.cfg',
+                info_file='gen_um_test/infrastructure/config/gen_um_test.cfg',
                 use_generator=True,
                 context_bundle=context_bundle
             )
@@ -144,14 +144,14 @@ class TestGenTest(TestCase):
         dummy_subprocessor = DummySubProcessor()
         dummy_cli = DummyCLI(return_code=0)
 
-        bundle = GenTestBundle(
+        bundle = GenUmTestBundle(
             base=mock_base,
             service=dummy_service,
             subprocessor=dummy_subprocessor,
             cli=dummy_cli
         )
 
-        engine = GenTest(bundle)
+        engine = GenUmTest(bundle)
         self.assertTrue(engine.is_initialized())
         self.assertTrue(engine.process())
 
@@ -162,7 +162,7 @@ class TestGenTest(TestCase):
         context_bundle = ContextBundleFactory.create_bundle()
         mock_base = BaseBundleFactory.create_bundle(
             options=BaseBundleOptions(
-                info_file='gen_test/infrastructure/config/gen_test.cfg',
+                info_file='gen_um_test/infrastructure/config/gen_um_test.cfg',
                 use_generator=True,
                 context_bundle=context_bundle
             )
@@ -172,14 +172,14 @@ class TestGenTest(TestCase):
         dummy_subprocessor = DummySubProcessor()
         dummy_cli = DummyCLI(return_code=1, stderr='CLI error')
 
-        bundle = GenTestBundle(
+        bundle = GenUmTestBundle(
             base=mock_base,
             service=dummy_service,
             subprocessor=dummy_subprocessor,
             cli=dummy_cli
         )
 
-        engine = GenTest(bundle)
+        engine = GenUmTest(bundle)
         self.assertTrue(engine.is_initialized())
         self.assertFalse(engine.process())
 
@@ -190,7 +190,7 @@ class TestGenTest(TestCase):
         context_bundle = ContextBundleFactory.create_bundle()
         mock_base = BaseBundleFactory.create_bundle(
             options=BaseBundleOptions(
-                info_file='gen_test/infrastructure/config/gen_test.cfg',
+                info_file='gen_um_test/infrastructure/config/gen_um_test.cfg',
                 use_generator=True,
                 context_bundle=context_bundle
             )
@@ -202,14 +202,14 @@ class TestGenTest(TestCase):
 
         mock_base.option_manager.is_initialized = Mock(return_value=False)
 
-        bundle = GenTestBundle(
+        bundle = GenUmTestBundle(
             base=mock_base,
             service=dummy_service,
             subprocessor=dummy_subprocessor,
             cli=dummy_cli
         )
 
-        engine = GenTest(bundle)
+        engine = GenUmTest(bundle)
         self.assertFalse(engine.is_initialized())
         self.assertFalse(engine.process())
 
@@ -220,7 +220,7 @@ class TestGenTest(TestCase):
         context_bundle = ContextBundleFactory.create_bundle()
         mock_base = BaseBundleFactory.create_bundle(
             options=BaseBundleOptions(
-                info_file='gen_test/infrastructure/config/gen_test.cfg',
+                info_file='gen_um_test/infrastructure/config/gen_um_test.cfg',
                 use_generator=True,
                 context_bundle=context_bundle
             )
@@ -231,14 +231,14 @@ class TestGenTest(TestCase):
         dummy_cli = DummyCLI()
         dummy_cli.run = Mock(side_effect=Exception('Unexpected error'))
 
-        bundle = GenTestBundle(
+        bundle = GenUmTestBundle(
             base=mock_base,
             service=dummy_service,
             subprocessor=dummy_subprocessor,
             cli=dummy_cli
         )
 
-        engine = GenTest(bundle)
+        engine = GenUmTest(bundle)
         self.assertTrue(engine.is_initialized())
         self.assertFalse(engine.process())
 
@@ -249,7 +249,7 @@ class TestGenTest(TestCase):
         context_bundle = ContextBundleFactory.create_bundle()
         mock_base = BaseBundleFactory.create_bundle(
             options=BaseBundleOptions(
-                info_file='gen_test/infrastructure/config/gen_test.cfg',
+                info_file='gen_um_test/infrastructure/config/gen_um_test.cfg',
                 use_generator=True,
                 context_bundle=context_bundle
             )
@@ -260,18 +260,18 @@ class TestGenTest(TestCase):
         dummy_cli = DummyCLI()
         dummy_cli.run = Mock(side_effect=ATSValueError('Validation error in run'))
 
-        bundle = GenTestBundle(
+        bundle = GenUmTestBundle(
             base=mock_base,
             service=dummy_service,
             subprocessor=dummy_subprocessor,
             cli=dummy_cli
         )
 
-        engine = GenTest(bundle)
+        engine = GenUmTest(bundle)
         self.assertTrue(engine.is_initialized())
         self.assertFalse(engine.process())
 
-    @patch('gen_test.setup.validator.GenTestBundleValidator.validate')
+    @patch('gen_um_test.setup.validator.GenUmTestBundleValidator.validate')
     def test_engine_init_generic_exception(self, mock_validate: Mock) -> None:
         '''
             Tests engine init handling unexpected exception in validator.
@@ -281,7 +281,7 @@ class TestGenTest(TestCase):
         context_bundle = ContextBundleFactory.create_bundle()
         mock_base = BaseBundleFactory.create_bundle(
             options=BaseBundleOptions(
-                info_file='gen_test/infrastructure/config/gen_test.cfg',
+                info_file='gen_um_test/infrastructure/config/gen_um_test.cfg',
                 use_generator=True,
                 context_bundle=context_bundle
             )
@@ -291,12 +291,12 @@ class TestGenTest(TestCase):
         dummy_subprocessor = DummySubProcessor()
         dummy_cli = DummyCLI()
 
-        bundle = GenTestBundle(
+        bundle = GenUmTestBundle(
             base=mock_base,
             service=dummy_service,
             subprocessor=dummy_subprocessor,
             cli=dummy_cli
         )
 
-        engine = GenTest(bundle)
+        engine = GenUmTest(bundle)
         self.assertFalse(engine.is_initialized())

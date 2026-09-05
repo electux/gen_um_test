@@ -5,18 +5,18 @@ Module
     opt_validator_test.py
 Copyright
     Copyright (C) 2026 Vladimir Roncevic <elektron.ronca@gmail.com>
-    gen_test is free software: you can redistribute it and/or modify it
+    gen_um_test is free software: you can redistribute it and/or modify it
     under the terms of the GNU General Public License as published by the
     Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
-    gen_test is distributed in the hope that it will be useful, but
+    gen_um_test is distributed in the hope that it will be useful, but
     WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
     See the GNU General Public License for more details.
     You should have received a copy of the GNU General Public License along
     with this program. If not, see <http://www.gnu.org/licenses/>.
 Info
-    Unit tests for GenTestBundleOptionsValidator class.
+    Unit tests for GenUmTestBundleOptionsValidator class.
 '''
 
 from __future__ import annotations
@@ -25,44 +25,44 @@ from unittest import TestCase
 
 from ats_utilities.exceptions import ATSTypeError, ATSValueError
 
-from gen_test.setup.opt_validator import GenTestBundleOptionsValidator
-from gen_test.setup.options import GenTestBundleOptions
+from gen_um_test.setup.opt_validator import GenUmTestBundleOptionsValidator
+from gen_um_test.setup.options import GenUmTestBundleOptions
 
 __author__ = 'Vladimir Roncevic'
-__copyright__ = '(C) 2026, https://vroncevic.github.io/gen_test'
+__copyright__ = '(C) 2026, https://vroncevic.github.io/gen_um_test'
 __credits__ = ['Vladimir Roncevic', 'Python Software Foundation']
-__license__ = 'https://github.com/vroncevic/gen_test/blob/dev/LICENSE'
-__version__ = '1.0.1'
+__license__ = 'https://github.com/vroncevic/gen_um_test/blob/dev/LICENSE'
+__version__ = '1.0.2'
 __maintainer__ = 'Vladimir Roncevic'
 __email__ = 'elektron.ronca@gmail.com'
 __status__ = 'Updated'
 
 
-class TestGenTestBundleOptionsValidator(TestCase):
+class TestGenUmTestBundleOptionsValidator(TestCase):
     '''
-        Unit tests for GenTestBundleOptionsValidator.
+        Unit tests for GenUmTestBundleOptionsValidator.
     '''
 
     def test_validate_success(self) -> None:
         '''
             Tests successful options validation.
         '''
-        options: GenTestBundleOptions = {'info_file': 'gen_test/infrastructure/config/gen_test.cfg'}
-        GenTestBundleOptionsValidator.validate(options)
-        self.assertTrue(GenTestBundleOptionsValidator.is_valid(options))
+        options: GenUmTestBundleOptions = {'info_file': 'gen_um_test/infrastructure/config/gen_um_test.cfg'}
+        GenUmTestBundleOptionsValidator.validate(options)
+        self.assertTrue(GenUmTestBundleOptionsValidator.is_valid(options))
 
     def test_validate_none_or_invalid(self) -> None:
         '''
             Tests failure on None, invalid type, or invalid field type.
         '''
         with self.assertRaises(ATSValueError):
-            GenTestBundleOptionsValidator.validate(None)  # type: ignore[arg-type]
-        self.assertFalse(GenTestBundleOptionsValidator.is_valid(None))  # type: ignore[arg-type]
+            GenUmTestBundleOptionsValidator.validate(None)  # type: ignore[arg-type]
+        self.assertFalse(GenUmTestBundleOptionsValidator.is_valid(None))  # type: ignore[arg-type]
 
         with self.assertRaises(ATSTypeError):
-            GenTestBundleOptionsValidator.validate('not_a_mapping')  # type: ignore[arg-type]
-        self.assertFalse(GenTestBundleOptionsValidator.is_valid('not_a_mapping'))  # type: ignore[arg-type]
+            GenUmTestBundleOptionsValidator.validate('not_a_mapping')  # type: ignore[arg-type]
+        self.assertFalse(GenUmTestBundleOptionsValidator.is_valid('not_a_mapping'))  # type: ignore[arg-type]
 
         with self.assertRaises(ATSTypeError):
-            GenTestBundleOptionsValidator.validate({'info_file': 123})  # type: ignore[arg-type]
-        self.assertFalse(GenTestBundleOptionsValidator.is_valid({'info_file': 123}))  # type: ignore[arg-type]
+            GenUmTestBundleOptionsValidator.validate({'info_file': 123})  # type: ignore[arg-type]
+        self.assertFalse(GenUmTestBundleOptionsValidator.is_valid({'info_file': 123}))  # type: ignore[arg-type]

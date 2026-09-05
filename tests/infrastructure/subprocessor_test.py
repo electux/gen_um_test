@@ -5,11 +5,11 @@ Module
     subprocessor_test.py
 Copyright
     Copyright (C) 2026 Vladimir Roncevic <elektron.ronca@gmail.com>
-    gen_test is free software: you can redistribute it and/or modify it
+    gen_um_test is free software: you can redistribute it and/or modify it
     under the terms of the GNU General Public License as published by the
     Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
-    gen_test is distributed in the hope that it will be useful, but
+    gen_um_test is distributed in the hope that it will be useful, but
     WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
     See the GNU General Public License for more details.
@@ -27,16 +27,16 @@ from unittest import TestCase
 
 from ats_utilities.exceptions import ATSTypeError, ATSValueError
 
-from gen_test.core.model.test_suite_config import TestSuiteConfig
-from gen_test.infrastructure.generator.cmake_generator import CMakeGenerator
-from gen_test.infrastructure.generator.code_formatter import CodeFormatter
-from gen_test.infrastructure.generator.fake_generator import FakeGenerator
-from gen_test.infrastructure.generator.main_generator import MainGenerator
-from gen_test.infrastructure.generator.mock_generator import MockGenerator
-from gen_test.infrastructure.generator.template_provider import TemplateProvider
-from gen_test.infrastructure.generator.test_generator import TestGenerator
-from gen_test.infrastructure.parser.cpp_parser import CppParser
-from gen_test.infrastructure.subprocessor import SubProcessor
+from gen_um_test.core.model.test_suite_config import TestSuiteConfig
+from gen_um_test.infrastructure.generator.cmake_generator import CMakeGenerator
+from gen_um_test.infrastructure.generator.code_formatter import CodeFormatter
+from gen_um_test.infrastructure.generator.fake_generator import FakeGenerator
+from gen_um_test.infrastructure.generator.main_generator import MainGenerator
+from gen_um_test.infrastructure.generator.mock_generator import MockGenerator
+from gen_um_test.infrastructure.generator.template_provider import TemplateProvider
+from gen_um_test.infrastructure.generator.test_generator import TestGenerator
+from gen_um_test.infrastructure.parser.cpp_parser import CppParser
+from gen_um_test.infrastructure.subprocessor import SubProcessor
 
 
 class TestSubProcessor(TestCase):

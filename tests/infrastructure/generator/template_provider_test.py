@@ -5,11 +5,11 @@ Module
     template_provider_test.py
 Copyright
     Copyright (C) 2026 Vladimir Roncevic <elektron.ronca@gmail.com>
-    gen_test is free software: you can redistribute it and/or modify it
+    gen_um_test is free software: you can redistribute it and/or modify it
     under the terms of the GNU General Public License as published by the
     Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
-    gen_test is distributed in the hope that it will be useful, but
+    gen_um_test is distributed in the hope that it will be useful, but
     WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
     See the GNU General Public License for more details.
@@ -24,7 +24,7 @@ from __future__ import annotations
 from unittest import TestCase
 from unittest.mock import patch
 
-from gen_test.infrastructure.generator.template_provider import TemplateProvider
+from gen_um_test.infrastructure.generator.template_provider import TemplateProvider
 
 
 class TestTemplateProvider(TestCase):
@@ -73,7 +73,7 @@ class TestTemplateProvider(TestCase):
         '''
             Tests exception handling during scheme loading.
         '''
-        with patch('gen_test.infrastructure.generator.template_provider.Loader') as mock_loader:
+        with patch('gen_um_test.infrastructure.generator.template_provider.Loader') as mock_loader:
             mock_loader.side_effect = RuntimeError('boom')
             tp = TemplateProvider()
             self.assertEqual(tp._scheme_data, {})
