@@ -21,6 +21,9 @@ Info
 
 from __future__ import annotations
 
+from os import unlink
+from os.path import exists
+from tempfile import NamedTemporaryFile
 from unittest import TestCase
 
 from ats_utilities.exceptions import ATSValueError
@@ -121,13 +124,40 @@ class TestCppParser(TestCase):
 
     def test_parse_file_real(self) -> None:
         '''
-            Tests parse_file on demo interface file.
+            Tests parse_file on a real interface header file.
         '''
         parser = CppParser()
-        interfaces = parser.parse_file('demo/ISerialPort.h')
-        self.assertEqual(len(interfaces), 1)
-        self.assertEqual(interfaces[0].name, 'ISerialPort')
-        self.assertEqual(len(interfaces[0].methods), 6)
+        content = '''#pragma once
+#include <string>
+#include <vector>
+
+namespace hardware::comm {
+
+class ISerialPort {
+public:
+    virtual ~ISerialPort() = default;
+    virtual bool open(const std::string& port_name, uint32_t baud_rate) = 0;
+    virtual void close() = 0;
+    virtual bool is_open() const = 0;
+    virtual size_t write(const std::vector<uint8_t>& data) = 0;
+    virtual std::vector<uint8_t> read(size_t max_bytes) = 0;
+    virtual uint32_t get_baud_rate() const = 0;
+};
+
+}  // namespace hardware::comm
+'''
+        with NamedTemporaryFile(mode='w', suffix='.h', delete=False) as tmp:
+            tmp.write(content)
+            tmp_path = tmp.name
+
+        try:
+            interfaces = parser.parse_file(tmp_path)
+            self.assertEqual(len(interfaces), 1)
+            self.assertEqual(interfaces[0].name, 'ISerialPort')
+            self.assertEqual(len(interfaces[0].methods), 6)
+        finally:
+            if exists(tmp_path):
+                unlink(tmp_path)
 
     def test_parse_source_empty(self) -> None:
         '''

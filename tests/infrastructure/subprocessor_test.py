@@ -57,6 +57,29 @@ class TestSubProcessor(TestCase):
         self.main_gen = MainGenerator(template_provider=self.provider)
         self.formatter = CodeFormatter()
 
+        self.fixture_dir = TemporaryDirectory()
+        self.interface_path = join(self.fixture_dir.name, 'ISerialPort.h')
+        with open(self.interface_path, 'w', encoding='utf-8') as handle:
+            handle.write('''#pragma once
+#include <string>
+#include <vector>
+
+namespace hardware::comm {
+
+class ISerialPort {
+public:
+    virtual ~ISerialPort() = default;
+    virtual bool open(const std::string& port_name, uint32_t baud_rate) = 0;
+    virtual void close() = 0;
+    virtual bool is_open() const = 0;
+    virtual size_t write(const std::vector<uint8_t>& data) = 0;
+    virtual std::vector<uint8_t> read(size_t max_bytes) = 0;
+    virtual uint32_t get_baud_rate() const = 0;
+};
+
+}  // namespace hardware::comm
+''')
+
         self.subprocessor = SubProcessor(
             parser=self.parser,
             mock_gen=self.mock_gen,
@@ -66,6 +89,12 @@ class TestSubProcessor(TestCase):
             main_gen=self.main_gen,
             formatter=self.formatter
         )
+
+    def tearDown(self) -> None:
+        '''
+            Cleans up temporary fixture directory.
+        '''
+        self.fixture_dir.cleanup()
 
     def test_initialization_and_str(self) -> None:
         '''
@@ -106,7 +135,7 @@ class TestSubProcessor(TestCase):
         '''
         with TemporaryDirectory() as temp_dir:
             config = TestSuiteConfig(
-                interface_path='demo/ISerialPort.h',
+                interface_path=self.interface_path,
                 output_dir=temp_dir
             )
             result = self.subprocessor.run(params=config)
@@ -119,7 +148,7 @@ class TestSubProcessor(TestCase):
         '''
         with TemporaryDirectory() as temp_dir:
             config = TestSuiteConfig(
-                interface_path='demo/ISerialPort.h',
+                interface_path=self.interface_path,
                 output_dir=temp_dir,
                 interface_name='ISerialPort'
             )
@@ -132,7 +161,7 @@ class TestSubProcessor(TestCase):
         '''
         with TemporaryDirectory() as temp_dir:
             config = TestSuiteConfig(
-                interface_path='demo/ISerialPort.h',
+                interface_path=self.interface_path,
                 output_dir=temp_dir,
                 interface_name='NonExistentInterface'
             )

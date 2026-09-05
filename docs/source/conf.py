@@ -29,7 +29,7 @@ path.insert(0, abspath('../../'))
 project: str = 'gen_test'
 project_copyright: str = '2026, Vladimir Roncevic <elektron.ronca@gmail.com>'
 author: str = 'Vladimir Roncevic <elektron.ronca@gmail.com>'
-version: str = '1.0.0'
+version: str = '1.0.1'
 release: str = 'https://github.com/vroncevic/gen_test/releases'
 extensions: list[str] = ['sphinx.ext.autodoc', 'sphinx.ext.viewcode']
 templates_path: list[str] = ['_templates']
