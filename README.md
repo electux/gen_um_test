@@ -1,6 +1,6 @@
 # Generate GoogleTest/GoogleMock Test Suites for C++ Interfaces
 
-<img align="right" src="https://raw.githubusercontent.com/vroncevic/gen_test/dev/docs/gen_test_logo.png" width="25%">
+<img align="right" src="https://raw.githubusercontent.com/electux/gen_test/dev/docs/gen_test_logo.png" width="25%">
 
 **gen_test** is a toolset for automatic generation of GoogleTest and GoogleMock test suites from C++ pure virtual interface headers.
 
@@ -10,7 +10,7 @@ The README is used to introduce the modules and provide instructions on
 how to install the modules, any machine dependencies it may have and any
 other information that should be provided before the modules are installed.
 
-[![gen_test python checker](https://github.com/vroncevic/gen_test/actions/workflows/gen_test_python_checker.yml/badge.svg)](https://github.com/vroncevic/gen_test/actions/workflows/gen_test_python_checker.yml) [![gen_test package checker](https://github.com/vroncevic/gen_test/actions/workflows/gen_test_package_checker.yml/badge.svg)](https://github.com/vroncevic/gen_test/actions/workflows/gen_test_package.yml) [![gen_test interface checker](https://github.com/vroncevic/gen_test/actions/workflows/gen_test_interface_checker.yml/badge.svg)](https://github.com/vroncevic/gen_test/actions/workflows/gen_test_interface_checker.yml) [![gen_test isp checker](https://github.com/vroncevic/gen_test/actions/workflows/gen_test_isp_checker.yml/badge.svg)](https://github.com/vroncevic/gen_test/actions/workflows/gen_test_isp_checker.yml) [![gen_test srp checker](https://github.com/vroncevic/gen_test/actions/workflows/gen_test_srp_checker.yml/badge.svg)](https://github.com/vroncevic/gen_test/actions/workflows/gen_test_srp_checker.yml) [![GitHub issues open](https://img.shields.io/github/issues/vroncevic/gen_test.svg)](https://github.com/vroncevic/gen_test/issues) [![GitHub contributors](https://img.shields.io/github/contributors/vroncevic/gen_test.svg)](https://github.com/vroncevic/gen_test/graphs/contributors)
+[![gen_test python checker](https://github.com/electux/gen_test/actions/workflows/gen_test_python_checker.yml/badge.svg)](https://github.com/electux/gen_test/actions/workflows/gen_test_python_checker.yml) [![gen_test package checker](https://github.com/electux/gen_test/actions/workflows/gen_test_package_checker.yml/badge.svg)](https://github.com/electux/gen_test/actions/workflows/gen_test_package.yml) [![gen_test interface checker](https://github.com/electux/gen_test/actions/workflows/gen_test_interface_checker.yml/badge.svg)](https://github.com/electux/gen_test/actions/workflows/gen_test_interface_checker.yml) [![gen_test isp checker](https://github.com/electux/gen_test/actions/workflows/gen_test_isp_checker.yml/badge.svg)](https://github.com/electux/gen_test/actions/workflows/gen_test_isp_checker.yml) [![gen_test srp checker](https://github.com/electux/gen_test/actions/workflows/gen_test_srp_checker.yml/badge.svg)](https://github.com/electux/gen_test/actions/workflows/gen_test_srp_checker.yml) [![GitHub issues open](https://img.shields.io/github/issues/electux/gen_test.svg)](https://github.com/electux/gen_test/issues) [![GitHub contributors](https://img.shields.io/github/contributors/electux/gen_test.svg)](https://github.com/electux/gen_test/graphs/contributors)
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -36,9 +36,9 @@ other information that should be provided before the modules are installed.
 
 Used next development environment
 
-![debian linux os](https://raw.githubusercontent.com/vroncevic/gen_test/dev/docs/debtux.png)
+![debian linux os](https://raw.githubusercontent.com/electux/gen_test/dev/docs/debtux.png)
 
-[![gen_test python3 build](https://github.com/vroncevic/gen_test/actions/workflows/gen_test_python3_build.yml/badge.svg)](https://github.com/vroncevic/gen_test/actions/workflows/gen_test_python3_build.yml)
+[![gen_test python3 build](https://github.com/electux/gen_test/actions/workflows/gen_test_python3_build.yml/badge.svg)](https://github.com/electux/gen_test/actions/workflows/gen_test_python3_build.yml)
 
 Currently there are three ways to install package
 * Install process based on using pip mechanism
@@ -59,7 +59,7 @@ pip3 install gen_test
 
 ##### Install using build
 
-Navigate to release **[page](https://github.com/vroncevic/gen_test/releases/)** download and extract release archive.
+Navigate to release **[page](https://github.com/electux/gen_test/releases/)** download and extract release archive.
 
 To install **gen_test** type the following
 
@@ -80,7 +80,7 @@ rm -f get-pip.py
 
 ##### Install using py setup
 
-Navigate to **[release page](https://github.com/vroncevic/gen_test/releases)** download and extract release archive.
+Navigate to **[release page](https://github.com/electux/gen_test/releases)** download and extract release archive.
 
 To install **gen_test** locate and run setup.py with arguments
 
@@ -303,11 +303,11 @@ Install package
 pip3 install gen_test
 ```
 
-Prepare main entry point by downloading [main.py](https://raw.githubusercontent.com/vroncevic/gen_test/main/main.py) or create your own.
+Prepare main entry point by downloading [main.py](https://raw.githubusercontent.com/electux/gen_test/main/main.py) or create your own.
 
 
 ```bash
-wget -O main.py https://raw.githubusercontent.com/vroncevic/gen_test/main/main.py
+wget -O main.py https://raw.githubusercontent.com/electux/gen_test/main/main.py
 ```
 
 Running tool for generating complete GoogleTest suite:
@@ -350,6 +350,6 @@ at your option, any later version of Python 3 you may have available.
 
 Lets help and support PSF.
 
-[![Python Software Foundation](https://raw.githubusercontent.com/vroncevic/gen_test/dev/docs/psf-logo-alpha.png)](https://www.python.org/psf/)
+[![Python Software Foundation](https://raw.githubusercontent.com/electux/gen_test/dev/docs/psf-logo-alpha.png)](https://www.python.org/psf/)
 
 [![Donate](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.python.org/psf/donations/)

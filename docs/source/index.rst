@@ -11,26 +11,26 @@ other information that should be provided before the tool is installed.
 
 |gen_test python checker| |gen_test python package| |gen_test interface checker| |gen_test isp checker| |gen_test srp checker| |github issues| |documentation status| |github contributors|
 
-.. |gen_test python checker| image:: https://github.com/vroncevic/gen_test/actions/workflows/gen_test_python_checker.yml/badge.svg
-   :target: https://github.com/vroncevic/gen_test/actions/workflows/gen_test_python_checker.yml
+.. |gen_test python checker| image:: https://github.com/electux/gen_test/actions/workflows/gen_test_python_checker.yml/badge.svg
+   :target: https://github.com/electux/gen_test/actions/workflows/gen_test_python_checker.yml
 
-.. |gen_test python package| image:: https://github.com/vroncevic/gen_test/actions/workflows/gen_test_package_checker.yml/badge.svg
-   :target: https://github.com/vroncevic/gen_test/actions/workflows/gen_test_package.yml
+.. |gen_test python package| image:: https://github.com/electux/gen_test/actions/workflows/gen_test_package_checker.yml/badge.svg
+   :target: https://github.com/electux/gen_test/actions/workflows/gen_test_package.yml
 
-.. |gen_test interface checker| image:: https://github.com/vroncevic/gen_test/actions/workflows/gen_test_interface_checker.yml/badge.svg
-   :target: https://github.com/vroncevic/gen_test/actions/workflows/gen_test_interface_checker.yml
+.. |gen_test interface checker| image:: https://github.com/electux/gen_test/actions/workflows/gen_test_interface_checker.yml/badge.svg
+   :target: https://github.com/electux/gen_test/actions/workflows/gen_test_interface_checker.yml
 
-.. |gen_test isp checker| image:: https://github.com/vroncevic/gen_test/actions/workflows/gen_test_isp_checker.yml/badge.svg
-   :target: https://github.com/vroncevic/gen_test/actions/workflows/gen_test_isp_checker.yml
+.. |gen_test isp checker| image:: https://github.com/electux/gen_test/actions/workflows/gen_test_isp_checker.yml/badge.svg
+   :target: https://github.com/electux/gen_test/actions/workflows/gen_test_isp_checker.yml
 
-.. |gen_test srp checker| image:: https://github.com/vroncevic/gen_test/actions/workflows/gen_test_srp_checker.yml/badge.svg
-   :target: https://github.com/vroncevic/gen_test/actions/workflows/gen_test_srp_checker.yml
+.. |gen_test srp checker| image:: https://github.com/electux/gen_test/actions/workflows/gen_test_srp_checker.yml/badge.svg
+   :target: https://github.com/electux/gen_test/actions/workflows/gen_test_srp_checker.yml
 
-.. |github issues| image:: https://img.shields.io/github/issues/vroncevic/gen_test.svg
-   :target: https://github.com/vroncevic/gen_test/issues
+.. |github issues| image:: https://img.shields.io/github/issues/electux/gen_test.svg
+   :target: https://github.com/electux/gen_test/issues
 
-.. |github contributors| image:: https://img.shields.io/github/contributors/vroncevic/gen_test.svg
-   :target: https://github.com/vroncevic/gen_test/graphs/contributors
+.. |github contributors| image:: https://img.shields.io/github/contributors/electux/gen_test.svg
+   :target: https://github.com/electux/gen_test/graphs/contributors
 
 .. |documentation status| image:: https://readthedocs.org/projects/gen_test/badge/?version=latest
    :target: https://gen_test.readthedocs.io/en/latest/?badge=latest
@@ -47,12 +47,12 @@ other information that should be provided before the tool is installed.
 
 |gen_test python3 build|
 
-.. |gen_test python3 build| image:: https://github.com/vroncevic/gen_test/actions/workflows/gen_test_python3_build.yml/badge.svg
-   :target: https://github.com/vroncevic/gen_test/actions/workflows/gen_test_python3_build.yml
+.. |gen_test python3 build| image:: https://github.com/electux/gen_test/actions/workflows/gen_test_python3_build.yml/badge.svg
+   :target: https://github.com/electux/gen_test/actions/workflows/gen_test_python3_build.yml
 
 Navigate to release `page`_ download and extract release archive.
 
-.. _page: https://github.com/vroncevic/gen_test/releases
+.. _page: https://github.com/electux/gen_test/releases
 
 To install **gen_test** type the following
 
@@ -219,7 +219,7 @@ Prepare main entry point by downloading `main.py` or create your own.
 
 .. code-block:: bash
 
-    wget -O main.py https://raw.githubusercontent.com/vroncevic/gen_test/main/main.py
+    wget -O main.py https://raw.githubusercontent.com/electux/gen_test/main/main.py
 
 Running tool for generating complete GoogleTest suite:
 
@@ -247,7 +247,7 @@ More documentation and info at
 👥 Contributing
 ---------------
 
-`Contributing to gen_test <https://github.com/vroncevic/gen_test/blob/dev/CONTRIBUTING.md>`_
+`Contributing to gen_test <https://github.com/electux/gen_test/blob/dev/CONTRIBUTING.md>`_
 
 📄 Copyright and licence
 -------------------------

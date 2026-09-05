@@ -1,5 +1,5 @@
 const DOCUMENTATION_OPTIONS = {
-    VERSION: 'https://github.com/vroncevic/gen_test/releases',
+    VERSION: 'https://github.com/electux/gen_test/releases',
     LANGUAGE: 'en',
     COLLAPSE_INDEX: false,
     BUILDER: 'html',
