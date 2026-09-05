@@ -1,0 +1,15 @@
+#pragma once
+
+#include <cstddef>
+#include "${INCLUDE_PATH}"
+
+${NAMESPACE_OPEN}
+class ${FAKE_CLASS} : public ${INTERFACE_NAME} {
+ public:
+  ~${FAKE_CLASS}() override = default;
+
+${CALL_COUNTERS}
+
+${STUB_METHODS}
+};
+${NAMESPACE_CLOSE}

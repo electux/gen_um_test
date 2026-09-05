@@ -1,0 +1,16 @@
+#pragma once
+
+#include <gmock/gmock.h>
+#include "${INCLUDE_PATH}"
+
+${NAMESPACE_OPEN}
+class ${MOCK_CLASS} : public ${INTERFACE_NAME} {
+ public:
+  ~${MOCK_CLASS}() override = default;
+
+${MOCK_METHODS}
+};
+
+using Nice${MOCK_CLASS} = ::testing::NiceMock<${MOCK_CLASS}>;
+using Strict${MOCK_CLASS} = ::testing::StrictMock<${MOCK_CLASS}>;
+${NAMESPACE_CLOSE}
